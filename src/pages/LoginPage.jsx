@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router";
-import { login } from "../utils/apis/login";
+import { login } from "../utils/apis/Auth";
 import kakao from "../static/images/kakao_login.png";
 
-const KAKAO_SOCIAL_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_RESTAPI_KEY}&redirect_uri=http://localhost:3000&response_type=code`;
+const KAKAO_SOCIAL_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_RESTAPI_KEY}&redirect_uri=http://sjcom.site:3000/kakao&response_type=code`;
 
 function LoginPage() {
   const histroy = useHistory();

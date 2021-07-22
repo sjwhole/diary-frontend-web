@@ -10,7 +10,17 @@ function Homepage() {
       <section>
         <div>
           {localStorage.getItem("JWT") ? (
-            <span>HIHI</span>
+            <>
+              <Link to="/post">로그인 완료! Post로 이동</Link>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("JWT");
+                  window.location.reload(false);
+                }}
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <Link to="/login">Login</Link>
           )}
