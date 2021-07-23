@@ -1,4 +1,4 @@
-import http from "./index";
+import {http} from "./index";
 
 export const login = async ({ username, password }) => {
   const response = await http().post("/auth/login/", {
