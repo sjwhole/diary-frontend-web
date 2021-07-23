@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { post } from "../utils/apis/post";
+import { createPost } from "../utils/apis/Post";
 
 function PostPage() {
   const [input, setInput] = useState({ grade: "", body: "" });
@@ -11,7 +11,7 @@ function PostPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(input).then(alert("Posted!"));
+    createPost(input).then(alert("Posted!"));
   }
 
   return localStorage.getItem("JWT") ? (
