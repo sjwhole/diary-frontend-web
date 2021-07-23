@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router";
 import { login } from "../utils/apis/Auth";
 import kakao from "../static/images/kakao_login.png";
+import styled from "styled-components";
 
 const KAKAO_SOCIAL_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_RESTAPI_KEY}&redirect_uri=http://sjcom.site:3000/kakao&response_type=code`;
 
@@ -35,8 +36,8 @@ function LoginPage() {
   return localStorage.getItem("JWT") ? (
     <Redirect to="/post" />
   ) : (
-    <>
-      <div>
+    <LoginBlock>
+      <div id="login">
         <form>
           <input
             type="text"
@@ -68,14 +69,34 @@ function LoginPage() {
           </span>
         )}
       </div>
-      <span> ----- or ------</span>
+      <span> ----------------- or ------------------</span>
       <div>
         <a href={KAKAO_SOCIAL_URL}>
           <img src={kakao} alt="" />
         </a>
       </div>
-    </>
+    </LoginBlock>
   );
 }
+
+const LoginBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  #login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & > form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+`;
 
 export default LoginPage;
