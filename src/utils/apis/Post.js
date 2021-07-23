@@ -1,7 +1,7 @@
-import http from "./index";
+import { httpAuth } from "./index";
 
 export const createPost = async ({ grade, body }) => {
-  const response = await http().post("/posts/", {
+  const response = await httpAuth().post("/posts/", {
     grade,
     body,
   });
@@ -9,6 +9,8 @@ export const createPost = async ({ grade, body }) => {
 };
 
 export const getMyPosts = async (year, month) => {
-  const response = await http().get(`/posts/my/?year=${year}&month=${month}`);
+  const response = await httpAuth().get(
+    `/posts/my/?year=${year}&month=${month}`
+  );
   return response;
 };
