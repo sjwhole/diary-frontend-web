@@ -1,10 +1,12 @@
 import axios from "axios";
 
-const Token = localStorage.getItem("JWT");
-
-export default axios.create({
-  baseURL: "http://3.34.142.4",
-  header: {
-    Authorization: `Bearer ${Token}`,
-  },
-});
+export default () => {
+  const Token = localStorage.getItem("JWT");
+  const request = axios.create({
+    baseURL: "http://3.34.142.4",
+    headers: {
+      Authorization: `Bearer ${Token}`,
+    },
+  });
+  return request;
+};
