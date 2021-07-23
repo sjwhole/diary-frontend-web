@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { createPost } from "../utils/apis/Post";
+import styled from "styled-components";
 
 function PostPage() {
   const [input, setInput] = useState({ grade: "", body: "" });
@@ -15,7 +16,7 @@ function PostPage() {
   }
 
   return localStorage.getItem("JWT") ? (
-    <>
+    <CreatePostBlock>
       <div>
         <form>
           <input
@@ -37,13 +38,22 @@ function PostPage() {
           </button>
         </form>
       </div>
-      <div>
-        <Link to="/my">나의 이야기들 보러가기</Link>
-      </div>
-    </>
+      <Link to="/my">나의 이야기들 보러가기</Link>
+    </CreatePostBlock>
   ) : (
     <Redirect to="/login" />
   );
 }
+
+const CreatePostBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  & > a {
+    margin-top: 20px;
+  }
+`;
 
 export default PostPage;
