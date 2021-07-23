@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { getMyPosts } from "../utils/apis/Post";
 import PostItem from "../components/PostItem/PostItem";
+import styled from "styled-components";
 
 function MyPostPage() {
   const [myPosts, setMyPosts] = useState([]);
@@ -18,12 +19,20 @@ function MyPostPage() {
   }, []);
 
   return (
-    <div>
+    <MyPostBlock>
       {myPosts
         ? myPosts.map((data) => <PostItem key={data.id} data={data} />)
         : "empty"}
-    </div>
+    </MyPostBlock>
   );
 }
+
+const MyPostBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
 export default MyPostPage;
