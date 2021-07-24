@@ -85,6 +85,7 @@ const LoginBlock = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: #ffffff;
   #login {
     display: flex;
     flex-direction: column;
@@ -95,7 +96,36 @@ const LoginBlock = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      & > input {
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+      & > button {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #4caf50;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #ffffff;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+      }
     }
+  }
+  & span {
+    margin-top: 2em;
+  }
+  img {
+    margin-top: 2em;
   }
 `;
 
