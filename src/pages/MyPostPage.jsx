@@ -33,6 +33,7 @@ const MyPostBlock = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #d6d3d1;
 `;
 
 export default MyPostPage;
