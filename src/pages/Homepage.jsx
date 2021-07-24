@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import nature from "../static/images/nature.jpeg"
 
 function Homepage() {
   return (
@@ -34,10 +35,17 @@ const LoginBlock = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: beige;
   height: 100vh;
+  background-color: #ededed;
+  background-image: url(${nature});
+  background-repeat: no-repeat;
+  background-size: cover;
   #title {
     font-size: 30px;
+    padding: 0.5em 0.5em;
+    color: #ffffff;
+    background-color: #71daec;
+    border-radius: 5%;
   }
   #logout {
     display: flex;
@@ -45,8 +53,35 @@ const LoginBlock = styled.div`
     justify-content: space-between;
     align-items: center;
     button {
-      margin-top: 15px;
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      outline: 0;
+      background: #7f817b;
+      width: 100%;
+      border: 0;
+      margin-top: 20px;
+      padding: 15px;
+      color: #ffffff;
+      font-size: 14px;
+      -webkit-transition: all 0.3 ease;
+      transition: all 0.3 ease;
+      cursor: pointer;
     }
+  }
+  a {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4caf50;
+    width: 100%;
+    border: 0;
+    margin-top: 20px;
+    padding: 15px;
+    color: #ffffff;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
   }
 `;
 
