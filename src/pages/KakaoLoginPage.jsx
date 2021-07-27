@@ -13,16 +13,16 @@ function KakaoLoginPage({ location }) {
   const code = query.code;
 
   useEffect(() => {
-    kakaoLogin(code)
-      .catch(() => {
+    (async () => {
+      try {
+        const { Token, nickname } = await kakaoLogin(code);
+        localStorage.setItem("JWT", Token);
+        localStorage.setItem("nickname", nickname);
+        history.push("/post");
+      } catch (e) {
         history.push("/login");
-      })
-      .then((Token) => {
-        if (Token) {
-          localStorage.setItem("JWT", Token);
-          history.push("/post");
-        }
-      });
+      }
+    })();
   }, []);
 
   return <></>;
