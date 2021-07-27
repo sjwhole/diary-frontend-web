@@ -17,20 +17,17 @@ function LoginPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    login(input)
-      .catch((e) => {
+    (async () => {
+      try {
+        const { Token, nickname } = await login(input);
+        localStorage.setItem("JWT", Token);
+        localStorage.setItem("nickname", nickname);
+        histroy.push("/post");
+      } catch (e) {
         setInput({ ...input, password: "" });
         setValid(false);
-      })
-      .then((Token) => {
-        if (Token) {
-          localStorage.setItem("JWT", Token);
-          histroy.push("/post");
-        } else {
-          setInput({ ...input, password: "" });
-          setValid(false);
-        }
-      });
+      }
+    })();
   }
 
   return localStorage.getItem("JWT") ? (
@@ -69,7 +66,8 @@ function LoginPage() {
           </span>
         )}
       </div>
-      <span> ----------------- or ------------------</span>
+      <hr />
+      <p>OR</p>
       <div>
         <a href={KAKAO_SOCIAL_URL}>
           <img src={kakao} alt="" />
@@ -126,6 +124,14 @@ const LoginBlock = styled.div`
   }
   img {
     margin-top: 2em;
+  }
+  hr {
+    border-color: #9e9e9e;
+    margin-top: 2em;
+    width: 50%;
+  }
+  p {
+    margin: 0;
   }
 `;
 
