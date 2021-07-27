@@ -15,9 +15,11 @@ function PostPage() {
     createPost(input).then(alert("Posted!"));
   }
 
+  const nickname = localStorage.getItem("nickname");
+
   return localStorage.getItem("JWT") ? (
     <CreatePostBlock>
-      <h1>나의 하루 </h1>
+      <h1>{`${nickname}님` || "나"}의 하루 </h1>
       <div>
         <input
           type="number"

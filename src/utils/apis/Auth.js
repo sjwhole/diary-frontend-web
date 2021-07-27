@@ -1,18 +1,18 @@
-import {http} from "./index";
+import { http } from "./index";
 
 export const login = async ({ username, password }) => {
   const response = await http().post("/auth/login/", {
     username,
     password,
   });
-  const Token = response.data.Token;
-  return Token;
+  const data = response.data;
+  return data;
 };
 
 export const kakaoLogin = async (code) => {
   const response = await http().post("/auth/kakao/login/", {
     code,
   });
-  const Token = response.data.Token;
-  return Token;
+  const data = response.data;
+  return data;
 };
