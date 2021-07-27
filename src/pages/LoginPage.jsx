@@ -55,20 +55,12 @@ function LoginPage() {
           <button type="submit" onClick={handleSubmit}>
             LOGIN
           </button>
+          {valid === false && (
+            <span>아이디 혹은 비밀번호가 일치하지 않습니다.</span>
+          )}
           <p>아이디가 없으신가요?</p>
           <Link to="/register">회원가입하기</Link>
         </form>
-        {valid === false && (
-          <span
-            style={{
-              opacity: 1,
-              visibility: "visible",
-              transition: "all ease 1s",
-            }}
-          >
-            Error
-          </span>
-        )}
       </div>
       <hr />
       <p>OR</p>
@@ -120,6 +112,9 @@ const LoginBlock = styled.div`
         -webkit-transition: all 0.3 ease;
         transition: all 0.3 ease;
         cursor: pointer;
+      }
+      & > span {
+        margin-top: 0.5em;
       }
       & > p {
         font-weight: 500;
