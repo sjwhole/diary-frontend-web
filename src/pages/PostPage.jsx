@@ -19,7 +19,7 @@ function PostPage() {
 
   return localStorage.getItem("JWT") ? (
     <CreatePostBlock>
-      <h1>{`${nickname}님` || "나"}의 하루 </h1>
+      <h1>{nickname ? `${nickname}님` : "나"}의 하루 </h1>
       <div>
         <input
           type="number"
