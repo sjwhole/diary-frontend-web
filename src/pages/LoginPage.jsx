@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { login } from "../utils/apis/Auth";
 import kakao from "../static/images/kakao_login.png";
 import styled from "styled-components";
@@ -34,12 +35,13 @@ function LoginPage() {
     <Redirect to="/post" />
   ) : (
     <LoginBlock>
+      <h1>로그인</h1>
       <div id="login">
         <form>
           <input
             type="text"
             name="username"
-            placeholder="username"
+            placeholder="id"
             value={input.username}
             onChange={handleOnChange}
           />
@@ -53,6 +55,8 @@ function LoginPage() {
           <button type="submit" onClick={handleSubmit}>
             LOGIN
           </button>
+          <p>아이디가 없으신가요?</p>
+          <Link to="/register">회원가입하기</Link>
         </form>
         {valid === false && (
           <span
@@ -116,6 +120,27 @@ const LoginBlock = styled.div`
         -webkit-transition: all 0.3 ease;
         transition: all 0.3 ease;
         cursor: pointer;
+      }
+      & > p {
+        font-weight: 500;
+        margin-top: 1em;
+      }
+      & > a {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #7f817b;
+        width: auto;
+        border: 0;
+        margin-top: 0.3em;
+        padding: 1em;
+        color: #ffffff;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
       }
     }
   }
