@@ -90,7 +90,7 @@ function LoginPage() {
             onChange={handleOnChange}
           />
           <button type="submit" onClick={handleSubmit}>
-            LOGIN
+            가입하기
           </button>
         </form>
         {errMessage.split("\n").map((err, idx) => (
