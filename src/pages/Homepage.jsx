@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import nature from "../static/images/nature.jpeg"
+import nature from "../static/images/nature.jpeg";
 
 function Homepage() {
+  const nickname = localStorage.getItem("nickname");
   return (
     <LoginBlock>
       <section>
@@ -12,7 +13,7 @@ function Homepage() {
       <section>
         {localStorage.getItem("JWT") ? (
           <div id="logout">
-            <Link to="/post">로그인 완료! Post로 이동</Link>
+            <Link to="/post">{`${nickname}님` || "나"}의 이야기로 이동</Link>
             <button
               onClick={() => {
                 localStorage.removeItem("JWT");
@@ -76,12 +77,14 @@ const LoginBlock = styled.div`
     width: 100%;
     border: 0;
     margin-top: 20px;
-    padding: 15px;
+    padding: 1em;
     color: #ffffff;
     font-size: 14px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    text-align: center;
+    text-decoration: none;
   }
 `;
 
