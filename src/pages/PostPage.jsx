@@ -36,7 +36,7 @@ function PostPage() {
           onChange={handleOnChange}
         />
         <button type="submit" onClick={handleSubmit}>
-          Post
+          작성하기
         </button>
       </div>
       <div id="my">
