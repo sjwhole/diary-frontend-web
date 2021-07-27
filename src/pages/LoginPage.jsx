@@ -53,7 +53,7 @@ function LoginPage() {
             onChange={handleOnChange}
           />
           <button type="submit" onClick={handleSubmit}>
-            LOGIN
+            로그인
           </button>
           {valid === false && (
             <span>아이디 혹은 비밀번호가 일치하지 않습니다.</span>
