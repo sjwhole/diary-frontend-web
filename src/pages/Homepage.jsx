@@ -13,7 +13,9 @@ function Homepage() {
       <section>
         {localStorage.getItem("JWT") ? (
           <div id="logout">
-            <Link to="/post">{`${nickname}님` || "나"}의 이야기로 이동</Link>
+            <Link to="/post">
+              {nickname ? `${nickname}님` : "나"}의 이야기로 이동
+            </Link>
             <button
               onClick={() => {
                 localStorage.removeItem("JWT");

@@ -16,3 +16,13 @@ export const kakaoLogin = async (code) => {
   const data = response.data;
   return data;
 };
+
+export const register = async ({ username, nickname, password }) => {
+  const response = await http().post("/auth/registration/", {
+    username,
+    nickname,
+    password,
+  });
+  const data = response.data;
+  return data;
+};
