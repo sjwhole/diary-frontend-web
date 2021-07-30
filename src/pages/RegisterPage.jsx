@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router";
-import { Link } from "react-router-dom";
-import { login } from "../utils/apis/Auth";
-import kakao from "../static/images/kakao_login.png";
+import { register } from "../utils/apis/Auth";
 import styled from "styled-components";
-
-const KAKAO_SOCIAL_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_RESTAPI_KEY}&redirect_uri=http://sjcom.site:3000/kakao&response_type=code`;
 
 function LoginPage() {
   const histroy = useHistory();
-  const [input, setInput] = useState({ username: "", password: "" });
-  const [valid, setValid] = useState(null);
+  const [input, setInput] = useState({
+    username: "",
+    nickname: "",
+    password: "",
+    passwordCheck: "",
+  });
+  const [errMessage, setErrMessage] = useState("");
 
   function handleOnChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -18,15 +19,37 @@ function LoginPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const { username, nickname, password, passwordCheck } = input;
+    if (username.length < 5) {
+      setErrMessage("ID는 5글자 이상이어야합니다.");
+      return;
+    }
+    if (!nickname) {
+      setErrMessage("닉네임을 입력해주세요.");
+      return;
+    }
+    if (!password) {
+      setErrMessage("비밀번호를 입력해주세요.");
+      return;
+    }
+    if (password !== passwordCheck) {
+      setErrMessage("비밀번호가 일치 하지 않습니다.");
+      return;
+    }
     (async () => {
       try {
-        const { Token, nickname } = await login(input);
+        const { Token, nickname } = await register(input);
         localStorage.setItem("JWT", Token);
         localStorage.setItem("nickname", nickname);
         histroy.push("/post");
       } catch (e) {
-        setInput({ ...input, password: "" });
-        setValid(false);
+        const errObj = e.response.data;
+        let errString = "";
+        for (const err in errObj) {
+          errString += errObj[err].join("\n");
+        }
+        console.log(errString);
+        setErrMessage(errString);
       }
     })();
   }
@@ -35,8 +58,8 @@ function LoginPage() {
     <Redirect to="/post" />
   ) : (
     <LoginBlock>
-      <h1>로그인</h1>
-      <div id="login">
+      <h1>회원가입</h1>
+      <div id="register">
         <form>
           <input
             type="text"
@@ -46,28 +69,33 @@ function LoginPage() {
             onChange={handleOnChange}
           />
           <input
+            type="text"
+            name="nickname"
+            placeholder="nickname"
+            value={input.nickname}
+            onChange={handleOnChange}
+          />
+          <input
             type="password"
             name="password"
             placeholder="password"
             value={input.password}
             onChange={handleOnChange}
           />
+          <input
+            type="password"
+            name="passwordCheck"
+            placeholder="password check"
+            value={input.passwordCheck}
+            onChange={handleOnChange}
+          />
           <button type="submit" onClick={handleSubmit}>
-            로그인
+            가입하기
           </button>
-          {valid === false && (
-            <span>아이디 혹은 비밀번호가 일치하지 않습니다.</span>
-          )}
-          <p>아이디가 없으신가요?</p>
-          <Link to="/register">회원가입하기</Link>
         </form>
-      </div>
-      <hr />
-      <p>OR</p>
-      <div>
-        <a href={KAKAO_SOCIAL_URL}>
-          <img src={kakao} alt="" />
-        </a>
+        {errMessage.split("\n").map((err, idx) => (
+          <p key={idx}>{err}</p>
+        ))}
       </div>
     </LoginBlock>
   );
@@ -80,7 +108,7 @@ const LoginBlock = styled.div`
   align-items: center;
   height: 100vh;
   background: #ffffff;
-  #login {
+  #register {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,45 +141,10 @@ const LoginBlock = styled.div`
         transition: all 0.3 ease;
         cursor: pointer;
       }
-      & > span {
-        margin-top: 0.5em;
-      }
-      & > p {
-        font-weight: 500;
-        margin-top: 1em;
-      }
-      & > a {
-        font-family: "Roboto", sans-serif;
-        text-transform: uppercase;
-        outline: 0;
-        background: #7f817b;
-        width: auto;
-        border: 0;
-        margin-top: 0.3em;
-        padding: 1em;
-        color: #ffffff;
-        font-size: 14px;
-        -webkit-transition: all 0.3 ease;
-        transition: all 0.3 ease;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-      }
     }
   }
-  & span {
-    margin-top: 2em;
-  }
-  img {
-    margin-top: 2em;
-  }
-  hr {
-    border-color: #9e9e9e;
-    margin-top: 2em;
-    width: 50%;
-  }
   p {
-    margin: 0;
+    margin: 0.1em;
   }
 `;
 
