@@ -10,6 +10,8 @@ import MyPostPage from "./pages/MyPostPage";
 
 const App = () => {
   return (
+    <>
+    <GlobalStyle/>
     <Router>
       <Switch>
         <Route exact path="/" component={Homepage} />
@@ -20,6 +22,7 @@ const App = () => {
         <Route exact path="/my" component={MyPostPage} />
       </Switch>
     </Router>
+    </>
   );
 };
 
